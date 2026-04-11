@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { resumeData } from "@/data/resume";
 
 const stats = [
-  { value: "9.1", label: "CGPA", suffix: "" },
-  { value: "2+", label: "Projects Shipped", suffix: "" },
-  { value: "300+", label: "Records Managed", suffix: "" },
-  { value: "40%", label: "Efficiency Gain", suffix: "" },
+  { value: "9.1", label: "CGPA" },
+  { value: "4+", label: "Projects Built" },
+  { value: "300+", label: "Records Managed" },
+  { value: "40%", label: "Efficiency Gain" },
 ];
 
 function useRevealSection() {
@@ -55,7 +56,7 @@ export default function AboutSection() {
           right: "-200px",
           width: "600px",
           height: "600px",
-          background: "radial-gradient(circle, rgba(108,99,255,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)",
           transform: "translateY(-50%)",
           pointerEvents: "none",
         }}
@@ -71,7 +72,7 @@ export default function AboutSection() {
           }}
           className="about-grid"
         >
-          {/* Left: Text */}
+          {/* Left: Photo + Text */}
           <div>
             <div className="reveal-up">
               <p className="section-label">About Me</p>
@@ -86,6 +87,14 @@ export default function AboutSection() {
                 Crafting experiences,{" "}
                 <span className="gradient-text">not just code</span>
               </h2>
+            </div>
+
+            {/* Profile Photo — mobile only shows here */}
+            <div
+              className="reveal-up photo-mobile"
+              style={{ display: "none", justifyContent: "center", marginBottom: "2rem" }}
+            >
+              <ProfilePhoto />
             </div>
 
             <div className="reveal-up">
@@ -127,7 +136,7 @@ export default function AboutSection() {
                 <span style={{ color: "var(--accent-2)" }}>GenAI and system design</span>.
               </p>
 
-              <div style={{ display: "flex", gap: "1rem" }}>
+              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                 <a href={resumeData.links.github} target="_blank" rel="noopener noreferrer" className="btn-primary">
                   GitHub Profile
                 </a>
@@ -138,8 +147,13 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right: Stats + Education Card */}
+          {/* Right: Photo + Stats + Education */}
           <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            {/* Profile Photo — desktop */}
+            <div className="reveal-up photo-desktop" style={{ display: "flex", justifyContent: "center" }}>
+              <ProfilePhoto />
+            </div>
+
             {/* Stats grid */}
             <div
               className="reveal-up"
@@ -150,13 +164,13 @@ export default function AboutSection() {
               }}
             >
               {stats.map((stat) => (
-                <div key={stat.label} className="glass-card shine-card" style={{ padding: "1.5rem" }}>
+                <div key={stat.label} className="glass-card shine-card" style={{ padding: "1.25rem" }}>
                   <div
                     style={{
-                      fontSize: "2rem",
+                      fontSize: "1.75rem",
                       fontWeight: 800,
                       fontFamily: "var(--font-display)",
-                      marginBottom: "0.25rem",
+                      marginBottom: "0.2rem",
                     }}
                     className="gradient-text"
                   >
@@ -164,7 +178,7 @@ export default function AboutSection() {
                   </div>
                   <div
                     style={{
-                      fontSize: "0.8rem",
+                      fontSize: "0.75rem",
                       color: "var(--text-secondary)",
                       fontFamily: "var(--font-mono)",
                       letterSpacing: "0.05em",
@@ -177,7 +191,7 @@ export default function AboutSection() {
             </div>
 
             {/* Education Card */}
-            <div className="reveal-up glass-card shine-card" style={{ padding: "1.75rem" }}>
+            <div className="reveal-up glass-card shine-card" style={{ padding: "1.5rem" }}>
               <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
                 <div
                   style={{
@@ -196,22 +210,14 @@ export default function AboutSection() {
                     <path d="M6 12v5c3 3 9 3 12 0v-5"/>
                   </svg>
                 </div>
-                <div>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.7rem",
-                      color: "var(--accent)",
-                      letterSpacing: "0.15em",
-                      marginBottom: "0.35rem",
-                    }}
-                  >
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", color: "var(--accent)", letterSpacing: "0.15em", marginBottom: "0.35rem" }}>
                     EDUCATION
                   </p>
-                  <h3 style={{ fontSize: "0.95rem", fontWeight: 600, marginBottom: "0.25rem" }}>
+                  <h3 style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.2rem" }}>
                     {resumeData.education[0].institution}
                   </h3>
-                  <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+                  <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)" }}>
                     {resumeData.education[0].degree}
                   </p>
                   <div
@@ -223,10 +229,10 @@ export default function AboutSection() {
                       borderTop: "1px solid var(--border)",
                     }}
                   >
-                    <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
+                    <span style={{ fontSize: "0.78rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
                       {resumeData.education[0].period}
                     </span>
-                    <span style={{ fontSize: "0.8rem", color: "var(--accent-3)", fontFamily: "var(--font-mono)", fontWeight: 600 }}>
+                    <span style={{ fontSize: "0.78rem", color: "var(--accent-3)", fontFamily: "var(--font-mono)", fontWeight: 600 }}>
                       CGPA: {resumeData.education[0].cgpa}
                     </span>
                   </div>
@@ -242,7 +248,7 @@ export default function AboutSection() {
                   alignItems: "center",
                   gap: "0.5rem",
                   padding: "0.5rem 1rem",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "var(--bg-card)",
                   border: "1px solid var(--border)",
                   borderRadius: "40px",
                 }}
@@ -261,13 +267,58 @@ export default function AboutSection() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .about-grid {
             grid-template-columns: 1fr !important;
             gap: 3rem !important;
           }
+          .photo-desktop { display: none !important; }
+          .photo-mobile { display: flex !important; }
         }
       `}</style>
     </section>
+  );
+}
+
+function ProfilePhoto() {
+  return (
+    <div className="profile-photo-wrap">
+      <div className="profile-photo-border" />
+      <div className="profile-photo-inner">
+        <Image
+          src="/amiya.png"
+          alt="Amiya Mishu — Full-Stack Developer"
+          width={300}
+          height={360}
+          priority
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center top",
+          }}
+        />
+      </div>
+      {/* Floating badge */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-14px",
+          right: "-14px",
+          background: "var(--accent)",
+          color: "#fff",
+          borderRadius: "12px",
+          padding: "0.5rem 0.85rem",
+          fontSize: "0.75rem",
+          fontFamily: "var(--font-mono)",
+          fontWeight: 600,
+          boxShadow: "0 4px 20px rgba(108,99,255,0.4)",
+          zIndex: 2,
+          whiteSpace: "nowrap",
+        }}
+      >
+        B.Tech IT • IEM Kolkata
+      </div>
+    </div>
   );
 }
