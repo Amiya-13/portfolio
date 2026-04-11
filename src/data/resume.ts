@@ -5,7 +5,7 @@ export const resumeData = {
   location: "Kolkata, West Bengal",
   phone: "+91 8789412414",
   email: "amiyamishu5@gmail.com",
-  photo: "/amiya.png",
+  photo: "/amiya2.jpg",
   links: {
     linkedin: "https://linkedin.com/in/amiya-mishu",
     github: "https://github.com/Amiya-13",
@@ -42,7 +42,8 @@ export const resumeData = {
     {
       name: "Schedly",
       subtitle: "MERN-based Event Management System",
-      link: "https://github.com/Amiya-13/Schedly",
+      link: "https://schedly-app.vercel.app",
+      githubLink: "https://github.com/Amiya-13/Schedly",
       highlights: [
         "Implemented 7-stage event approval workflow, reducing manual coordination effort by 60%.",
         "Developed AI-assisted recommendation features, improving relevant event discovery by 40%.",
@@ -53,7 +54,8 @@ export const resumeData = {
     {
       name: "FastCom",
       subtitle: "Multi-vendor E-commerce Platform",
-      link: "https://github.com/Amiya-13/FastCom",
+      link: "https://fastcom-store.vercel.app",
+      githubLink: "https://github.com/Amiya-13/FastCom",
       highlights: [
         "Built platform supporting 3 user roles and 25+ APIs, enabling multi-vendor purchases.",
         "Developed secure checkout system with JWT; designed revenue model with vendor subscriptions.",
@@ -64,7 +66,8 @@ export const resumeData = {
     {
       name: "Zemble",
       subtitle: "Freelance Marketplace Platform",
-      link: "https://github.com/Amiya-13/Zemble",
+      link: "https://zemble.vercel.app",
+      githubLink: "https://github.com/Amiya-13/Zemble",
       highlights: [
         "Built full-stack freelance marketplace connecting clients with skilled freelancers across multiple domains.",
         "Implemented mobile-first responsive design with service worker optimizations for near-instant load times.",
@@ -96,12 +99,12 @@ export const resumeData = {
     },
     {
       event: "Diversion 2026",
-      role: "Organizing Team Member",
+      role: "Core Organiser",
       period: "Feb 2026",
       highlights: [
-        "Supported technical team for a 48-hour MLH hackathon, managing registrations for 250+ participants.",
-        "Assisted with event website updates, registration management, and real-time issue resolution.",
-        "Coordinated participant onboarding and scheduling to ensure smooth operations throughout the event.",
+        "Core organiser for Diversion 2026, one of Eastern India's largest MLH-affiliated 48-hour hackathons with 250+ participants.",
+        "Led the official event website — spearheaded updates, managed registrations end-to-end, and resolved live issues during the hackathon.",
+        "Coordinated across domains including participant onboarding, scheduling, and real-time communications to keep operations running smoothly.",
       ],
     },
     {
