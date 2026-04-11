@@ -260,7 +260,7 @@ export default function AboutSection() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 768px) {
           .about-grid {
             grid-template-columns: 1fr !important;

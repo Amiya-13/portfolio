@@ -342,7 +342,7 @@ export default function ContactSection() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 768px) {
           .contact-grid {
             grid-template-columns: 1fr !important;

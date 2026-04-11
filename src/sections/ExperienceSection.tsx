@@ -223,7 +223,7 @@ export default function ExperienceSection() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 900px) {
           .exp-grid {
             grid-template-columns: 1fr !important;
