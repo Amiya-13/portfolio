@@ -3,13 +3,14 @@
 @import "tailwindcss";
 
 /* ──────────────────────────────────────────────
-   Design Tokens
+   Design Tokens — Dark Mode (default)
 ────────────────────────────────────────────── */
-:root {
+:root,
+[data-theme="dark"] {
   --bg-primary: #050508;
   --bg-secondary: #0d0d14;
   --bg-card: #11111a;
-  --bg-card-hover: #16162080;
+  --bg-card-hover: rgba(22, 22, 32, 0.5);
   --border: rgba(255, 255, 255, 0.06);
   --border-hover: rgba(255, 255, 255, 0.12);
   --text-primary: #f0f0f5;
@@ -23,6 +24,41 @@
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Syne', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(17, 17, 26, 0.7);
+  --noise-opacity: 0.025;
+  --grid-color: rgba(108, 99, 255, 0.03);
+}
+
+/* ──────────────────────────────────────────────
+   Light Mode Tokens
+────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-primary: #f5f5fa;
+  --bg-secondary: #ebebf5;
+  --bg-card: #ffffff;
+  --bg-card-hover: rgba(235, 235, 245, 0.8);
+  --border: rgba(0, 0, 0, 0.07);
+  --border-hover: rgba(0, 0, 0, 0.15);
+  --text-primary: #0f0f1a;
+  --text-secondary: #4a4a6a;
+  --text-muted: #8b8ba7;
+  --accent: #5a52e0;
+  --accent-light: #6c63ff;
+  --accent-glow: rgba(90, 82, 224, 0.2);
+  --accent-2: #e8426a;
+  --accent-3: #22c55e;
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --noise-opacity: 0.012;
+  --grid-color: rgba(90, 82, 224, 0.04);
+}
+
+/* ──────────────────────────────────────────────
+   Theme Transition
+────────────────────────────────────────────── */
+html {
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* ──────────────────────────────────────────────
@@ -47,6 +83,7 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   cursor: none;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* ──────────────────────────────────────────────
@@ -140,17 +177,18 @@ h1, h2, h3, h4, h5, h6 {
    Glass Card
 ────────────────────────────────────────────── */
 .glass-card {
-  background: rgba(17, 17, 26, 0.7);
+  background: var(--glass-bg);
   border: 1px solid var(--border);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 16px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.4s ease;
 }
 
 .glass-card:hover {
   border-color: var(--border-hover);
-  box-shadow: 0 0 40px rgba(108, 99, 255, 0.08);
+  box-shadow: 0 0 40px var(--accent-glow);
   transform: translateY(-2px);
 }
 
@@ -162,7 +200,7 @@ h1, h2, h3, h4, h5, h6 {
   inset: 0;
   z-index: 2000;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: var(--noise-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 256px 256px;
 }
@@ -234,7 +272,7 @@ h1, h2, h3, h4, h5, h6 {
 .skill-tag:hover {
   background: rgba(108, 99, 255, 0.2);
   border-color: rgba(108, 99, 255, 0.4);
-  color: #fff;
+  color: var(--text-primary);
 }
 
 /* ──────────────────────────────────────────────
@@ -302,7 +340,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-primary:hover {
   background: var(--accent-light);
-  box-shadow: 0 0 30px rgba(108, 99, 255, 0.4);
+  box-shadow: 0 0 30px var(--accent-glow);
   transform: translateY(-2px);
 }
 
@@ -325,8 +363,31 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-outline:hover {
   border-color: var(--accent);
-  box-shadow: 0 0 20px rgba(108, 99, 255, 0.15);
+  box-shadow: 0 0 20px var(--accent-glow);
   transform: translateY(-2px);
+}
+
+/* ──────────────────────────────────────────────
+   Theme Toggle Button
+────────────────────────────────────────────── */
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
 }
 
 /* ──────────────────────────────────────────────
@@ -387,18 +448,10 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(108, 99, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(108, 99, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
-}
-
-/* ──────────────────────────────────────────────
-   Magnetic Button Effect
-────────────────────────────────────────────── */
-.magnetic-wrap {
-  display: inline-block;
-  position: relative;
 }
 
 /* ──────────────────────────────────────────────
@@ -432,11 +485,45 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ──────────────────────────────────────────────
-   Counter Animation
+   Profile Photo
 ────────────────────────────────────────────── */
-@keyframes count-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.profile-photo-wrap {
+  position: relative;
+  width: 300px;
+  height: 360px;
+  flex-shrink: 0;
+}
+
+.profile-photo-border {
+  position: absolute;
+  inset: -3px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  z-index: 0;
+  animation: rotate-border 6s linear infinite;
+}
+
+@keyframes rotate-border {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.profile-photo-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.profile-photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 /* ──────────────────────────────────────────────
@@ -455,5 +542,9 @@ h1, h2, h3, h4, h5, h6 {
   }
   .cursor-dot, .cursor-ring {
     display: none;
+  }
+  .profile-photo-wrap {
+    width: 220px;
+    height: 270px;
   }
 }
