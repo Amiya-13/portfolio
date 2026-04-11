@@ -51,16 +51,38 @@ export default function ContactSection() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const copyEmail = () => {
     navigator.clipboard.writeText(resumeData.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:${resumeData.email}?subject=Portfolio Message from ${formState.name}&body=${formState.message}%0A%0AFrom: ${formState.email}`;
-    setSent(true);
+    setIsSubmitting(true);
+    
+    try {
+      await fetch(`https://formsubmit.co/ajax/${resumeData.email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      });
+      setSent(true);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to send message. Please try again or email directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const socialLinks = [
@@ -394,12 +416,19 @@ export default function ContactSection() {
                   />
                 </div>
 
-                <button type="submit" className="btn-primary" style={{ justifyContent: "center" }}>
-                  Send Message
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="22" y1="2" x2="11" y2="13"/>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                  </svg>
+                <button
+                  type="submit"
+                  className="btn-primary"
+                  style={{ justifyContent: "center", opacity: isSubmitting ? 0.7 : 1, pointerEvents: isSubmitting ? "none" : "auto" }}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {!isSubmitting && (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="22" y1="2" x2="11" y2="13"/>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                  )}
                 </button>
               </form>
             )}
