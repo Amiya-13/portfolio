@@ -6,52 +6,52 @@
    Design Tokens — Dark Mode (default)
 ────────────────────────────────────────────── */
 :root,
-:root[data-theme="dark"] {
-  --bg-primary: #050508;
-  --bg-secondary: #0d0d14;
-  --bg-card: #11111a;
-  --bg-card-hover: rgba(22, 22, 32, 0.5);
-  --border: rgba(255, 255, 255, 0.06);
-  --border-hover: rgba(255, 255, 255, 0.12);
-  --text-primary: #f0f0f5;
-  --text-secondary: #8b8ba7;
-  --text-muted: #52526e;
-  --accent: #6c63ff;
-  --accent-light: #8b85ff;
-  --accent-glow: rgba(108, 99, 255, 0.3);
-  --accent-2: #ff6584;
-  --accent-3: #43e97b;
+html[data-theme="dark"] {
+  --bg-primary: #120a05;
+  --bg-secondary: #1f1208;
+  --bg-card: #1f140c;
+  --bg-card-hover: rgba(31, 20, 12, 0.8);
+  --border: rgba(255, 126, 51, 0.1);
+  --border-hover: rgba(255, 126, 51, 0.25);
+  --text-primary: #f5ece6;
+  --text-secondary: #d4baab;
+  --text-muted: #a68470;
+  --accent: #ff7e33;
+  --accent-light: #ff9f66;
+  --accent-glow: rgba(255, 126, 51, 0.2);
+  --accent-2: #ff4500;
+  --accent-3: #ffb347;
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Syne', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.4);
-  --glass-bg: rgba(17, 17, 26, 0.7);
-  --noise-opacity: 0.025;
-  --grid-color: rgba(108, 99, 255, 0.03);
+  --glass-bg: rgba(31, 20, 12, 0.8);
+  --noise-opacity: 0.035;
+  --grid-color: rgba(255, 126, 51, 0.04);
 }
 
 /* ──────────────────────────────────────────────
    Light Mode Tokens
 ────────────────────────────────────────────── */
-:root[data-theme="light"] {
-  --bg-primary: #f5f5fa;
-  --bg-secondary: #ebebf5;
+html[data-theme="light"] {
+  --bg-primary: #fcf9f5;
+  --bg-secondary: #f2e9e1;
   --bg-card: #ffffff;
-  --bg-card-hover: rgba(235, 235, 245, 0.8);
-  --border: rgba(0, 0, 0, 0.07);
-  --border-hover: rgba(0, 0, 0, 0.15);
-  --text-primary: #0f0f1a;
-  --text-secondary: #4a4a6a;
-  --text-muted: #8b8ba7;
-  --accent: #5a52e0;
-  --accent-light: #6c63ff;
-  --accent-glow: rgba(90, 82, 224, 0.2);
-  --accent-2: #e8426a;
-  --accent-3: #22c55e;
-  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.08);
+  --bg-card-hover: rgba(242, 233, 225, 0.8);
+  --border: rgba(0, 0, 0, 0.09);
+  --border-hover: rgba(0, 0, 0, 0.18);
+  --text-primary: #1f140c;
+  --text-secondary: #5c4436;
+  --text-muted: #8c7365;
+  --accent: #e65c00;
+  --accent-light: #ff7e33;
+  --accent-glow: rgba(230, 92, 0, 0.15);
+  --accent-2: #d93800;
+  --accent-3: #f0951a;
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.06);
   --glass-bg: rgba(255, 255, 255, 0.85);
-  --noise-opacity: 0.012;
-  --grid-color: rgba(90, 82, 224, 0.04);
+  --noise-opacity: 0.02;
+  --grid-color: rgba(230, 92, 0, 0.05);
 }
 
 /* ──────────────────────────────────────────────
@@ -78,8 +78,8 @@ html {
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
   font-family: var(--font-sans);
   overflow-x: hidden;
   cursor: none;

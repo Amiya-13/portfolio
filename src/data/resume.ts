@@ -5,7 +5,7 @@ export const resumeData = {
   location: "Kolkata, West Bengal",
   phone: "+91 8789412414",
   email: "amiyamishu5@gmail.com",
-  photo: "/amiya2.jpg",
+  photo: "/amiya3.jpg",
   links: {
     linkedin: "https://www.linkedin.com/in/amiya-mishu-871913272/",
     github: "https://github.com/Amiya-13",

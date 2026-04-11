@@ -286,7 +286,7 @@ function ProfilePhoto() {
       <div className="profile-photo-border" />
       <div className="profile-photo-inner">
         <Image
-          src="/amiya2.jpg"
+          src="/amiya3.jpg"
           alt="Amiya Mishu — Full-Stack Developer"
           width={300}
           height={360}
