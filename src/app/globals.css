@@ -6,7 +6,7 @@
    Design Tokens — Dark Mode (default)
 ────────────────────────────────────────────── */
 :root,
-[data-theme="dark"] {
+:root[data-theme="dark"] {
   --bg-primary: #050508;
   --bg-secondary: #0d0d14;
   --bg-card: #11111a;
@@ -33,7 +33,7 @@
 /* ──────────────────────────────────────────────
    Light Mode Tokens
 ────────────────────────────────────────────── */
-[data-theme="light"] {
+:root[data-theme="light"] {
   --bg-primary: #f5f5fa;
   --bg-secondary: #ebebf5;
   --bg-card: #ffffff;

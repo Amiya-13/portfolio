@@ -7,9 +7,9 @@ export const resumeData = {
   email: "amiyamishu5@gmail.com",
   photo: "/amiya2.jpg",
   links: {
-    linkedin: "https://linkedin.com/in/amiya-mishu",
+    linkedin: "https://www.linkedin.com/in/amiya-mishu-871913272/",
     github: "https://github.com/Amiya-13",
-    leetcode: "https://leetcode.com/amiyamishu",
+    leetcode: "https://leetcode.com/u/Amiya_tech/",
   },
   education: [
     {
@@ -42,7 +42,7 @@ export const resumeData = {
     {
       name: "Schedly",
       subtitle: "MERN-based Event Management System",
-      link: "https://schedly-app.vercel.app",
+      link: "https://schedly-v1.vercel.app/login",
       githubLink: "https://github.com/Amiya-13/Schedly",
       highlights: [
         "Implemented 7-stage event approval workflow, reducing manual coordination effort by 60%.",
@@ -54,7 +54,7 @@ export const resumeData = {
     {
       name: "FastCom",
       subtitle: "Multi-vendor E-commerce Platform",
-      link: "https://fastcom-store.vercel.app",
+      link: "https://fastcom-v1.vercel.app/",
       githubLink: "https://github.com/Amiya-13/FastCom",
       highlights: [
         "Built platform supporting 3 user roles and 25+ APIs, enabling multi-vendor purchases.",
