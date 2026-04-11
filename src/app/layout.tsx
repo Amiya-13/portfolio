@@ -4,6 +4,7 @@ import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import LenisProvider from "@/components/LenisProvider";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Amiya Mishu — Full-Stack Developer",
@@ -25,13 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <LenisProvider>
-          <div className="noise-overlay" />
-          <CustomCursor />
-          <ScrollProgress />
-          <Navbar />
-          {children}
-        </LenisProvider>
+        <ThemeProvider>
+          <LenisProvider>
+            <div className="noise-overlay" />
+            <CustomCursor />
+            <ScrollProgress />
+            <Navbar />
+            {children}
+          </LenisProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
