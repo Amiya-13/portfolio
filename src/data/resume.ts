@@ -5,9 +5,10 @@ export const resumeData = {
   location: "Kolkata, West Bengal",
   phone: "+91 8789412414",
   email: "amiyamishu5@gmail.com",
+  photo: "/amiya.png",
   links: {
     linkedin: "https://linkedin.com/in/amiya-mishu",
-    github: "https://github.com/amiyamishu",
+    github: "https://github.com/Amiya-13",
     leetcode: "https://leetcode.com/amiyamishu",
   },
   education: [
@@ -41,7 +42,7 @@ export const resumeData = {
     {
       name: "Schedly",
       subtitle: "MERN-based Event Management System",
-      link: "https://github.com/amiyamishu/schedly",
+      link: "https://github.com/Amiya-13/Schedly",
       highlights: [
         "Implemented 7-stage event approval workflow, reducing manual coordination effort by 60%.",
         "Developed AI-assisted recommendation features, improving relevant event discovery by 40%.",
@@ -52,13 +53,35 @@ export const resumeData = {
     {
       name: "FastCom",
       subtitle: "Multi-vendor E-commerce Platform",
-      link: "https://github.com/amiyamishu/fastcom",
+      link: "https://github.com/Amiya-13/FastCom",
       highlights: [
         "Built platform supporting 3 user roles and 25+ APIs, enabling multi-vendor purchases.",
         "Developed secure checkout system with JWT; designed revenue model with vendor subscriptions.",
         "Integrated responsive shopkeeper dashboards, improving operational visibility by 50%.",
       ],
       tech: ["React", "Node.js", "PostgreSQL", "Express", "JWT"],
+    },
+    {
+      name: "Zemble",
+      subtitle: "Freelance Marketplace Platform",
+      link: "https://github.com/Amiya-13/Zemble",
+      highlights: [
+        "Built full-stack freelance marketplace connecting clients with skilled freelancers across multiple domains.",
+        "Implemented mobile-first responsive design with service worker optimizations for near-instant load times.",
+        "Designed multi-role auth system (client, freelancer, admin) with secure JWT and MongoDB Atlas backend.",
+      ],
+      tech: ["React", "Node.js", "MongoDB", "Express", "JWT"],
+    },
+    {
+      name: "Mask Detection",
+      subtitle: "Real-time AI Face Mask Detection System",
+      link: "https://github.com/Amiya-13/Mask-Detection",
+      highlights: [
+        "Built a real-time face mask detection system using deep learning with 95%+ accuracy on live webcam feeds.",
+        "Trained a custom CNN model on 10,000+ annotated images distinguishing masked vs unmasked faces.",
+        "Integrated with OpenCV for real-time video stream processing and overlay annotation.",
+      ],
+      tech: ["Python", "TensorFlow", "OpenCV", "CNN", "NumPy"],
     },
   ],
   leadership: [
