@@ -65,7 +65,7 @@ export default function SkillsSection() {
       style={{
         padding: "7rem 0",
         position: "relative",
-        background: "linear-gradient(to bottom, transparent, rgba(108,99,255,0.02), transparent)",
+        background: "linear-gradient(to bottom, transparent, rgba(108,99,255,0.015), transparent)",
       }}
     >
       <div className="section-container">
@@ -85,7 +85,14 @@ export default function SkillsSection() {
           </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "1.25rem",
+          }}
+          className="skills-grid"
+        >
           {Object.entries(resumeData.skills).map(([category, skills]) => (
             <div key={category} className="reveal-up glass-card" style={{ padding: "2rem" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.5rem" }}>
@@ -100,7 +107,7 @@ export default function SkillsSection() {
                 <h3
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.8rem",
+                    fontSize: "0.78rem",
                     letterSpacing: "0.15em",
                     color: categoryColors[category] ?? "var(--accent)",
                   }}
@@ -131,64 +138,15 @@ export default function SkillsSection() {
             </div>
           ))}
         </div>
-
-        {/* Proficiency bars for key skills */}
-        <div className="reveal-up glass-card" style={{ padding: "2rem", marginTop: "2rem" }}>
-          <h3
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
-              letterSpacing: "0.15em",
-              color: "var(--text-muted)",
-              marginBottom: "1.75rem",
-            }}
-          >
-            CORE PROFICIENCY
-          </h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            {[
-              { name: "React.js", level: 88 },
-              { name: "Node.js / Express", level: 82 },
-              { name: "JavaScript / TypeScript", level: 85 },
-              { name: "MongoDB / PostgreSQL", level: 75 },
-              { name: "Java", level: 78 },
-            ].map((skill) => (
-              <div key={skill.name}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  <span style={{ fontSize: "0.9rem", color: "var(--text-primary)" }}>{skill.name}</span>
-                  <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
-                    {skill.level}%
-                  </span>
-                </div>
-                <div
-                  style={{
-                    height: "5px",
-                    background: "rgba(255,255,255,0.05)",
-                    borderRadius: "3px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "100%",
-                      width: `${skill.level}%`,
-                      background: "linear-gradient(90deg, var(--accent), var(--accent-2))",
-                      borderRadius: "3px",
-                      transition: "width 1.5s cubic-bezier(0.16, 1, 0.3, 1)",
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .skills-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
