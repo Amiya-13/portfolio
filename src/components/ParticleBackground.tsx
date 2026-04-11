@@ -24,7 +24,7 @@ function ParticleField() {
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#6c63ff"
+        color="#ff4500"
         size={0.015}
         sizeAttenuation
         depthWrite={false}
@@ -38,7 +38,7 @@ export default function ParticleBackground() {
   return (
     <div
       style={{
-        position: "absolute",
+        position: "fixed",
         inset: 0,
         zIndex: 0,
         pointerEvents: "none",

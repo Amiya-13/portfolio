@@ -34,8 +34,8 @@ html[data-theme="dark"] {
    Light Mode Tokens
 ────────────────────────────────────────────── */
 html[data-theme="light"] {
-  --bg-primary: #fcf9f5;
-  --bg-secondary: #f2e9e1;
+  --bg-primary: #fff2e6;
+  --bg-secondary: #ffe1cc;
   --bg-card: #ffffff;
   --bg-card-hover: rgba(242, 233, 225, 0.8);
   --border: rgba(0, 0, 0, 0.09);
@@ -186,9 +186,41 @@ h1, h2, h3, h4, h5, h6 {
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.4s ease;
 }
 
+@keyframes card-entrance-flash {
+  0% { 
+    opacity: 0; 
+    transform: translateY(60px) scale(0.95); 
+    box-shadow: 0 4px 30px var(--shadow-card); 
+  }
+  40% { 
+    opacity: 1; 
+    transform: translateY(-8px) scale(1.02); 
+    box-shadow: 0 0 60px var(--accent-glow), 0 0 20px var(--accent-light); 
+    border-color: var(--accent);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+    box-shadow: 0 4px 30px var(--shadow-card); 
+    border-color: var(--border);
+  }
+}
+
+.reveal-up.visible.glass-card,
+.reveal-up.glass-card.visible {
+  transition: none !important; /* override default reveal-up transition */
+  animation: card-entrance-flash 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes card-flash {
+  0% { box-shadow: 0 4px 30px var(--shadow-card); box-shadow: 0 0 10px var(--accent-glow); }
+  50% { box-shadow: 0 0 50px var(--accent-glow); }
+  100% { box-shadow: 0 4px 30px var(--shadow-card); box-shadow: 0 0 10px var(--accent-glow); }
+}
+
 .glass-card:hover {
   border-color: var(--border-hover);
-  box-shadow: 0 0 40px var(--accent-glow);
+  animation: card-flash 2.5s infinite ease-in-out;
   transform: translateY(-2px);
 }
 
