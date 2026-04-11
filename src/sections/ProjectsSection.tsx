@@ -19,7 +19,7 @@ function useRevealSection() {
       { threshold: 0.1 }
     );
     children.forEach((child, i) => {
-      (child as HTMLElement).style.transitionDelay = `${i * 0.12}s`;
+      (child as HTMLElement).style.transitionDelay = `${i * 0.1}s`;
       observer.observe(child);
     });
     return () => observer.disconnect();
@@ -27,14 +27,18 @@ function useRevealSection() {
   return ref;
 }
 
+const projectAccents = [
+  { primary: "#6c63ff", secondary: "rgba(108,99,255,0.1)", glow: "rgba(108,99,255,0.15)" },
+  { primary: "#ff6584", secondary: "rgba(255,101,132,0.1)", glow: "rgba(255,101,132,0.12)" },
+  { primary: "#43e97b", secondary: "rgba(67,233,123,0.1)", glow: "rgba(67,233,123,0.12)" },
+  { primary: "#f7c55c", secondary: "rgba(247,197,92,0.1)",  glow: "rgba(247,197,92,0.12)" },
+];
+
+const projectEmojis = ["⚡", "🛒", "👥", "🤖"];
+
 export default function ProjectsSection() {
   const sectionRef = useRevealSection();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-
-  const projectColors = [
-    { primary: "var(--accent)", secondary: "rgba(108,99,255,0.08)" },
-    { primary: "var(--accent-2)", secondary: "rgba(255,101,132,0.08)" },
-  ];
 
   return (
     <section
@@ -43,7 +47,7 @@ export default function ProjectsSection() {
       style={{
         padding: "7rem 0",
         position: "relative",
-        background: "linear-gradient(to bottom, transparent, rgba(108,99,255,0.02), transparent)",
+        background: "linear-gradient(to bottom, transparent, rgba(108,99,255,0.015), transparent)",
       }}
     >
       {/* Glow */}
@@ -54,13 +58,13 @@ export default function ProjectsSection() {
           right: "-150px",
           width: "500px",
           height: "500px",
-          background: "radial-gradient(circle, rgba(67,233,123,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(67,233,123,0.05) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
 
       <div className="section-container">
-        <div className="reveal-up" style={{ marginBottom: "4rem" }}>
+        <div className="reveal-up" style={{ marginBottom: "3.5rem" }}>
           <p className="section-label">Portfolio</p>
           <h2 style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 800 }}>
             Things I've{" "}
@@ -75,13 +79,21 @@ export default function ProjectsSection() {
               lineHeight: 1.7,
             }}
           >
-            A selection of projects that pushed my skills and solved real problems.
+            Projects that challenged me, taught me, and made it to production.
           </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+        {/* 2x2 Project Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "1.5rem",
+          }}
+          className="projects-grid"
+        >
           {resumeData.projects.map((project, idx) => {
-            const colors = projectColors[idx % projectColors.length];
+            const accent = projectAccents[idx % projectAccents.length];
             const isHovered = hoveredCard === project.name;
 
             return (
@@ -91,122 +103,148 @@ export default function ProjectsSection() {
                 onMouseEnter={() => setHoveredCard(project.name)}
                 onMouseLeave={() => setHoveredCard(null)}
                 style={{
-                  padding: "2.25rem",
-                  display: "grid",
-                  gridTemplateColumns: "1fr auto",
-                  gap: "2rem",
+                  padding: "2rem",
                   position: "relative",
                   overflow: "hidden",
-                  boxShadow: isHovered ? `0 0 50px ${colors.secondary}` : "none",
-                  borderColor: isHovered ? `${colors.primary}30` : "var(--border)",
+                  borderColor: isHovered ? `${accent.primary}40` : "var(--border)",
+                  boxShadow: isHovered ? `0 0 40px ${accent.glow}` : "var(--shadow-card)",
+                  transition: "all 0.4s ease",
+                  cursor: "default",
                 }}
                 data-cursor-hover
               >
-                {/* Background Number */}
+                {/* Background accent number */}
                 <div
                   style={{
                     position: "absolute",
-                    top: "50%",
-                    right: "2rem",
-                    transform: "translateY(-50%)",
+                    bottom: "-0.5rem",
+                    right: "1.25rem",
                     fontFamily: "var(--font-display)",
-                    fontSize: "8rem",
+                    fontSize: "6rem",
                     fontWeight: 900,
-                    color: colors.secondary,
+                    color: isHovered ? accent.glow : "var(--border)",
                     letterSpacing: "-0.05em",
                     userSelect: "none",
-                    transition: "color 0.3s ease",
+                    lineHeight: 1,
+                    transition: "color 0.4s ease",
                     pointerEvents: "none",
                   }}
                 >
                   {String(idx + 1).padStart(2, "0")}
                 </div>
 
-                <div style={{ position: "relative", zIndex: 1 }}>
-                  {/* Header */}
-                  <div style={{ marginBottom: "1.25rem" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.4rem" }}>
+                {/* Header */}
+                <div style={{ marginBottom: "1.25rem" }}>
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "10px",
+                      background: accent.secondary,
+                      border: `1px solid ${accent.primary}30`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "1.2rem",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    {projectEmojis[idx]}
+                  </div>
+
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "0.5rem" }}>
+                    <div>
                       <h3
                         style={{
-                          fontSize: "1.5rem",
+                          fontSize: "1.25rem",
                           fontWeight: 800,
                           fontFamily: "var(--font-display)",
-                          color: isHovered ? colors.primary : "var(--text-primary)",
+                          color: isHovered ? accent.primary : "var(--text-primary)",
                           transition: "color 0.3s ease",
+                          marginBottom: "0.3rem",
                         }}
                       >
                         {project.name}
                       </h3>
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <p style={{ fontSize: "0.78rem", color: accent.primary, fontFamily: "var(--font-mono)" }}>
+                        {project.subtitle}
+                      </p>
+                    </div>
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${project.name} code`}
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        flexShrink: 0,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: "50%",
+                        border: `1px solid ${accent.primary}40`,
+                        color: accent.primary,
+                        transition: "all 0.3s ease",
+                        textDecoration: "none",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = accent.secondary;
+                        e.currentTarget.style.transform = "scale(1.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "transparent";
+                        e.currentTarget.style.transform = "none";
+                      }}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Highlights */}
+                <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.55rem", marginBottom: "1.25rem", position: "relative", zIndex: 1 }}>
+                  {project.highlights.slice(0, 2).map((h, i) => (
+                    <li key={i} style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start" }}>
+                      <span
                         style={{
-                          width: "28px",
-                          height: "28px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+                          width: "5px",
+                          height: "5px",
                           borderRadius: "50%",
-                          border: `1px solid ${colors.primary}40`,
-                          color: colors.primary,
-                          transition: "background 0.3s ease",
+                          background: accent.primary,
+                          marginTop: "7px",
                           flexShrink: 0,
                         }}
-                        aria-label={`View ${project.name} on GitHub`}
-                      >
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                          <polyline points="15 3 21 3 21 9"/>
-                          <line x1="10" y1="14" x2="21" y2="3"/>
-                        </svg>
-                      </a>
-                    </div>
-                    <p style={{ fontSize: "0.85rem", color: colors.primary, fontFamily: "var(--font-mono)" }}>
-                      {project.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Highlights */}
-                  <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.65rem", marginBottom: "1.5rem" }}>
-                    {project.highlights.map((h, i) => (
-                      <li key={i} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
-                        <span
-                          style={{
-                            width: "5px",
-                            height: "5px",
-                            borderRadius: "50%",
-                            background: colors.primary,
-                            marginTop: "8px",
-                            flexShrink: 0,
-                          }}
-                        />
-                        <span style={{ fontSize: "0.875rem", color: "var(--text-secondary)", lineHeight: 1.65 }}>
-                          {h}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tech Tags */}
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        style={{
-                          padding: "0.25rem 0.7rem",
-                          background: `${colors.primary}10`,
-                          border: `1px solid ${colors.primary}25`,
-                          borderRadius: "20px",
-                          fontSize: "0.75rem",
-                          fontFamily: "var(--font-mono)",
-                          color: colors.primary,
-                        }}
-                      >
-                        {tech}
+                      />
+                      <span style={{ fontSize: "0.83rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>
+                        {h}
                       </span>
-                    ))}
-                  </div>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tech Tags */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", position: "relative", zIndex: 1 }}>
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      style={{
+                        padding: "0.2rem 0.6rem",
+                        background: accent.secondary,
+                        border: `1px solid ${accent.primary}25`,
+                        borderRadius: "20px",
+                        fontSize: "0.7rem",
+                        fontFamily: "var(--font-mono)",
+                        color: accent.primary,
+                      }}
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             );
@@ -228,6 +266,14 @@ export default function ProjectsSection() {
           </a>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .projects-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
