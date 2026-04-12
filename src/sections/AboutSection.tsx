@@ -106,7 +106,7 @@ export default function AboutSection() {
                   marginBottom: "1.25rem",
                 }}
               >
-                I'm a second-year B.Tech IT student at the{" "}
+                I'm a third-year sophomore in B.Tech in Information Technology at{" "}
                 <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>
                   Institute of Engineering and Management, Kolkata
                 </span>{" "}
