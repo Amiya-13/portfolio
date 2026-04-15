@@ -70,6 +70,7 @@ export const resumeData = {
       githubLink: "https://github.com/Amiya-13/Zemble",
       highlights: [
         "Built full-stack freelance marketplace connecting clients with skilled freelancers across multiple domains.",
+        "Developed a platform where freelancers can collaborate amongst themselves and bid for the same project when time is the constraint.",
         "Implemented mobile-first responsive design with service worker optimizations for near-instant load times.",
         "Designed multi-role auth system (client, freelancer, admin) with secure JWT and MongoDB Atlas backend.",
       ],
